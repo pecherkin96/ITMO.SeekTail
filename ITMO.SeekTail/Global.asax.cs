@@ -7,6 +7,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Data.Entity;
 using ITMO.SeekTail.Models;
+using ITMO.SeekTail.Data;
 
 namespace ITMO.SeekTail
 {
@@ -14,14 +15,12 @@ namespace ITMO.SeekTail
     {
         protected void Application_Start()
         {
+            Database.SetInitializer(new AppDbInitializer());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Database.SetInitializer(new PetColorDbInitializer());
-            Database.SetInitializer(new AnimalDbInitializer());
-            Database.SetInitializer(new LocationDbInitializer());
-            Database.SetInitializer(new ShelterDbInitializer());
+            
         }
     }
 }

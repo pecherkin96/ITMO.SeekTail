@@ -1,44 +1,50 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - приложение ASP.NET</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title - Seek Tail</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <div class="navbar-brand">
+                    @Html.ActionLink("Поиск хвостов", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            @Html.ActionLink("Животные", "Index", "Home", new { area = "" }, new { @class = "nav-link text-dark" })
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 Управление
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @Html.ActionLink("Животные", "Index", "Pets", new { area = "" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Приюты", "Index", "Shelters", new { area = "" }, new { @class = "dropdown-item" })
+                            </div>
+                        </li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Добавить животное", "AddPet")</li>
-                    @*<li>@Html.ActionLink("Информация", "About", "Home")</li>
-        <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>*@
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
+        </nav>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
-        </footer>
     </div>
-
+    <footer class="border-top footer text-muted navbar-fixed-bottom">
+        <div class="container">
+            <p class="text-center">&copy; @DateTime.Now.Year - Seek Tail</p>
+        </div>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

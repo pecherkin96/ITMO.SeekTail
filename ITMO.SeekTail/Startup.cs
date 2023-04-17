@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using Microsoft.Extensions.DependencyInjection;
 
 [assembly: OwinStartupAttribute(typeof(ITMO.SeekTail.Startup))]
 namespace ITMO.SeekTail
@@ -10,5 +11,6 @@ namespace ITMO.SeekTail
         {
             ConfigureAuth(app);
         }
+
     }
 }

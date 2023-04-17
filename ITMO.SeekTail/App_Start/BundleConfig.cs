@@ -19,11 +19,16 @@ namespace ITMO.SeekTail
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            bundles.Add(new Bundle("~/bundles/bootstrap").Include(
+                      "~/Scripts/bootstrap.bundle.js",
+                      "~/Scripts/bootstrap.esm.js",
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-grid.css",
+                      "~/Content/bootstrap-reboot.css",
+                      "~/Content/bootstrap-utilities.css",
                       "~/Content/site.css"));
         }
     }

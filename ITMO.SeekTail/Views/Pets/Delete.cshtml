@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ITMO.SeekTail.Models.Pet>
+
+@{
+    ViewBag.Title = "Подробнее";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row text">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-8 offset-2">
+            <p>
+                <h1 class="text-danger">Действительно хотите удалить @item.Name?</h1>
+            </p>
+            <div class="row">
+                <div class="col-md-8 offset-2">
+                    <div class="form-group text-center">
+                        <img id="ProfilePicturePreview" class="border-info rounded-circle" style="max-width: 215px" />
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => item.LinkImage, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => item.LinkImage, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => item.Name, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => item.Name, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => item.Animal.Type, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => item.Animal.Type, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => item.PetColor.Color, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => item.PetColor.Color, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => item.PetStatus.Name, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => item.PetStatus.Name, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => item.Shelter.Name, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => item.Shelter.Name, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => item.Description, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => item.Description, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.ActionLink("Редактировать", "Edit", "Pets", new { id = item.PetId }, new { @class = "btn btn-outline-success float-right" })
+                        @Html.ActionLink("Вернуться в список", "Index", "Pets", new { area = "" }, new { @class = "btn btn-outline-secondary" })
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $("#item_LinkImage").val();
+        })
+    </script>
+}

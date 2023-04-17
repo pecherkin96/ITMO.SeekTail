@@ -1,0 +1,83 @@
+﻿@model ITMO.SeekTail.Models.Pet
+
+@{
+    ViewBag.Title = "Изменить информацию о животном";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row text">
+        <div class="col-md-8 offset-2">
+            <p>
+                <h1>Изменить информацию о животном</h1>
+            </p>
+            <div class="row">
+                <div class="col-md-8 offset-2">
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.PetId)
+                    @Html.HiddenFor(model => model.NoticeDate)
+                    <div class="form-group text-center">
+                        <img id="ProfilePicturePreview" style="max-width: 215px" />
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LinkImage, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.LinkImage, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LinkImage, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="d-sm-inline-flex justify-content-center">
+                        <div class="form-group flex-column ">
+                            <label class="control-label">Вид</label>
+                            @Html.DropDownListFor(model => model.AnimalId, ViewBag.Animals as SelectList, htmlAttributes: new { @class = "form-group btn btn-sm btn-secondary dropdown-toggle" })
+                        </div>
+                        <div class="form-group flex-column">
+                            <label class="control-label">Цвет</label>
+                            @Html.DropDownListFor(model => model.PetColorId, ViewBag.Colors as SelectList, htmlAttributes: new { @class = "form-group btn btn-sm btn-secondary dropdown-toggle" })
+                        </div>
+                        <div class="form-group flex-column">
+                            <label class="control-label">Статус</label>
+                            @Html.DropDownListFor(model => model.PetStatusId, ViewBag.Statuses as SelectList, htmlAttributes: new { @class = "form-group btn btn-sm btn-secondary dropdown-toggle" })
+                        </div>
+                        <div class="form-group flex-column">
+                            <label class="control-label">Приют</label>
+                            @Html.DropDownListFor(model => model.ShelterId, ViewBag.Shelters as SelectList, htmlAttributes: new { @class = "form-group btn btn-sm btn-secondary dropdown-toggle" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Изменить" class="btn btn-outline-success float-right" />
+                        @Html.ActionLink("Вернуться в список", "Index", "Pets", new { area = "" }, new { @class = "btn btn-outline-secondary" })
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $("#LinkImage").val();
+        })
+
+        $("#LinkImage").on("change", function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $(this).val();
+        })
+    </script>
+}

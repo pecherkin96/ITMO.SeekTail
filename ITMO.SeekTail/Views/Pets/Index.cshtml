@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ITMO.SeekTail.Models.Pet>
+
+@{
+    ViewBag.Title = "Список Животных";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2 ">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center">@Html.DisplayNameFor(model => model.LinkImage)</th>
+                    <th class="text-center">@Html.DisplayNameFor(model => model.Name)</th>
+                    <th class="text-center">@Html.DisplayNameFor(model => model.Description)</th>
+                    <th class="text-center">Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count() == 0)
+                {
+                    <tr>
+                        <td class="align-middle">
+                        </td>
+                        <td class="align-middle">
+                        </td>
+                        <td class="align-middle">
+                        </td>
+                        <td class="align-middle">
+                            <a class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Добавить </a>
+                        </td>
+                    </tr>
+
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="align-middle">
+                                <img class="rounded-circle" src="@item.LinkImage" alt="@item.Name" style="max-width: 150px" />
+                            </td>
+                            <td class="align-middle">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td class="align-middle">
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td class="align-middle d-flex justify-content-center">
+                                @Html.ActionLink("Редактировать", "Edit", new { id = item.PetId }, new {@class = "btn btn-outline-primary bi bi-pencil-square " })|
+                                @Html.ActionLink("Подробнее", "Details", new { id = item.PetId }, new {@class = "btn btn-outline-info bi bi-eye " })|
+                                @Html.ActionLink("Удалить", "Delete", new { id = item.PetId }, new {@class = "btn btn-danger text-white bi bi-trash " })
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+    <div d = "button-dobavit-zuvotnoe" class="text-white">
+        @Html.ActionLink("Добавить", "Create", "Pets", new { @class = "btn btn-success bi bi-plus-circle "})
+    </div>
+</div>
